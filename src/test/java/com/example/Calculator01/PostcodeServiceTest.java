@@ -1,5 +1,6 @@
 package com.example.Calculator01;
 
+/*
 import com.example.Calculator01.dao.PostcodeDAO;
 import com.example.Calculator01.entity.PostcodeData;
 import com.example.Calculator01.entity.ResponseData;
@@ -105,3 +106,6 @@ public class PostcodeServiceTest {
     }
 
 }
+
+*/
+

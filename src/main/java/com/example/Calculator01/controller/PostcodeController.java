@@ -29,12 +29,10 @@ public class PostcodeController {
 
     }
 
-    @PutMapping("/postcodes")
+    @PutMapping("/newCoordinates")
     public String updatePostcodeData(@RequestBody PostcodeData thePostcodeData){
 
-        postcodeService.updatePostcodeCoordinates(thePostcodeData);
-
-        return postcodeService.validateUpdate(thePostcodeData);
+        return postcodeService.updatePostcodeCoordinates(thePostcodeData);
     }
 
 }

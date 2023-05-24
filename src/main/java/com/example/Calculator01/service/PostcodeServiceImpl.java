@@ -24,14 +24,6 @@ public class PostcodeServiceImpl implements PostcodeService{
     }
 
     @Override
-    @Transactional
-    public void updatePostcodeCoordinates(PostcodeData thePostcodeData) {
-
-        postcodeDAO.updatePostcodeCoordinates(thePostcodeData);
-
-    }
-
-    @Override
     public ResponseData calculateDistance(String startPostcode, String endPostcode) {
 
         PostcodeData startCoordinates = postcodeDAO.findByPostcode(startPostcode);
@@ -59,28 +51,6 @@ public class PostcodeServiceImpl implements PostcodeService{
 
     }
 
-
-    @Override
-    public String validateUpdate(PostcodeData thePostcodeData) {
-
-        PostcodeData updatedPostcodeData = postcodeDAO.findByPostcode(thePostcodeData.getPostcode());
-
-        String output;
-
-        if (updatedPostcodeData.getLatitude() == thePostcodeData.getLatitude() && updatedPostcodeData.getLongitude() == thePostcodeData.getLongitude()){
-            output = "coordinates are successfully updated;\n"
-                    + "\nselected postcode: "+thePostcodeData.getPostcode()
-                    + "\nnew latitude: " + updatedPostcodeData.getLatitude()
-                    + "\nnew longitude: " + updatedPostcodeData.getLongitude()
-            ;
-        }else{
-            output = "an error occurred";
-        }
-
-        return output;
-    }
-
-
     private double haversine(double degree1, double degree2) {
         return square(Math.sin((degree1 - degree2) / 2.0));
     }
@@ -88,4 +58,22 @@ public class PostcodeServiceImpl implements PostcodeService{
     private double square(double x) {
         return x * x;
     }
+
+    @Override
+    @Transactional
+    public String updatePostcodeCoordinates(PostcodeData clientRequest) {
+
+        postcodeDAO.updatePostcodeCoordinates(clientRequest);
+
+        PostcodeData dbResult = postcodeDAO.findByPostcode(clientRequest.getPostcode());
+
+        if(clientRequest.equals(dbResult)){
+            return "coordinates are successfully updated;\n"
+                    + "\nselected postcode: "+ dbResult.getPostcode()
+                    + "\nnew latitude: " + dbResult.getLatitude()
+                    + "\nnew longitude: " + dbResult.getLongitude();
+        }
+        return "an error occurred";
+    }
+
 }

@@ -3,6 +3,8 @@ package com.example.Calculator01.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.Objects;
+
 @Entity
 @Getter
 @Setter
@@ -33,5 +35,25 @@ public class PostcodeData {
         this.latitude = latitude;
         this.longitude = longitude;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        PostcodeData other = (PostcodeData) obj;
+
+        // Compare each variable for equality
+        return Objects.equals(id, other.id) &&
+                Objects.equals(postcode, other.postcode) &&
+                Objects.equals(latitude, other.latitude) &&
+                Objects.equals(longitude, other.longitude);
+    }
+
 
 }

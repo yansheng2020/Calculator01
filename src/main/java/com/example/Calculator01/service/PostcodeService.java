@@ -7,10 +7,8 @@ public interface PostcodeService {
 
     PostcodeData findByPostcode(String thePostcode);
 
-    void updatePostcodeCoordinates(PostcodeData thePostcodeData);
+    String updatePostcodeCoordinates(PostcodeData thePostcodeData);
 
     ResponseData calculateDistance(String startPostcode, String endPostcode);
-
-    String validateUpdate(PostcodeData thePostcodeData);
 
 }
