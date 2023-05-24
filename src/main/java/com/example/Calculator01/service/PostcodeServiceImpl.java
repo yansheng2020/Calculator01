@@ -13,13 +13,8 @@ import java.util.Optional;
 public class PostcodeServiceImpl implements PostcodeService{
 
     private final static double EARTH_RADIUS = 6371;
-    private PostcodeDAO postcodeDAO;
-
     @Autowired
-    public PostcodeServiceImpl(PostcodeDAO thePostcodeDAO){
-        postcodeDAO = thePostcodeDAO;
-    }
-
+    private PostcodeDAO postcodeDAO;
 
     @Override
     public PostcodeData findByPostcode(String thePostcode) {

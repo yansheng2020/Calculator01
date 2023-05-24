@@ -3,17 +3,15 @@ package com.example.Calculator01.controller;
 import com.example.Calculator01.entity.PostcodeData;
 import com.example.Calculator01.entity.ResponseData;
 import com.example.Calculator01.service.PostcodeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1")
 public class PostcodeController {
 
+    @Autowired
     private PostcodeService postcodeService;
-
-    public PostcodeController(PostcodeService thePostcodeService){
-        postcodeService = thePostcodeService;
-    }
 
     @GetMapping("/postcode/{postcode0}")
     public PostcodeData getCoordinates(@PathVariable String postcode0){

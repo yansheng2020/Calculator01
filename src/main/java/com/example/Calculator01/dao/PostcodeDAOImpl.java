@@ -9,12 +9,8 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class PostcodeDAOImpl implements PostcodeDAO {
 
-    private EntityManager entityManager;
-
     @Autowired
-    public PostcodeDAOImpl(EntityManager theEntityManager) {
-        entityManager = theEntityManager;
-    }
+    private EntityManager entityManager;
 
     @Override
     public PostcodeData findByPostcode(String thePostcode) {
