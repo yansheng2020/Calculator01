@@ -1,20 +1,17 @@
-package com.example.Calculator01.rest;
+package com.example.Calculator01.controller;
 
 import com.example.Calculator01.entity.PostcodeData;
 import com.example.Calculator01.entity.ResponseData;
 import com.example.Calculator01.service.PostcodeService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
-
 @RestController
 @RequestMapping("/api")
-public class PostcodeRestController {
+public class PostcodeController {
 
     private PostcodeService postcodeService;
 
-    public PostcodeRestController(PostcodeService thePostcodeService){
+    public PostcodeController(PostcodeService thePostcodeService){
         postcodeService = thePostcodeService;
     }
 

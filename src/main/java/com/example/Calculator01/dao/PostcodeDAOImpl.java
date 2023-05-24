@@ -7,12 +7,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class PostcodeDAOJpaImpl implements PostcodeDAO {
+public class PostcodeDAOImpl implements PostcodeDAO {
 
     private EntityManager entityManager;
 
     @Autowired
-    public PostcodeDAOJpaImpl(EntityManager theEntityManager) {
+    public PostcodeDAOImpl(EntityManager theEntityManager) {
         entityManager = theEntityManager;
     }
 

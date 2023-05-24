@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
-@TestPropertySource("/application-test.properties")
+@TestPropertySource("/src/test/resources/application-test.properties")
 @SpringBootTest
 
 public class PostcodeServiceTest {
