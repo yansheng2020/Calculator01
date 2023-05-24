@@ -20,18 +20,12 @@ public class PostcodeController {
 
     }
 
-    @GetMapping("/{postcode1}/{postcode2}")
+    @GetMapping("/distance/{postcode1}/{postcode2}")
     public ResponseData getDistance(
             @PathVariable String postcode1,
             @PathVariable String postcode2){
 
-        PostcodeData data1 = postcodeService.findByPostcode(postcode1);
-        PostcodeData data2 = postcodeService.findByPostcode(postcode2);
-        double theDistance = postcodeService.calculateDistance(data1, data2);
-
-        ResponseData theResponseData = postcodeService.compileResponseData(data1, data2, theDistance);
-
-        return theResponseData;
+        return postcodeService.calculateDistance(postcode1, postcode2);
 
     }
 

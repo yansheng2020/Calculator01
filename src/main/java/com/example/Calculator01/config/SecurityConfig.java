@@ -25,7 +25,7 @@ public class SecurityConfig {
         http.authorizeHttpRequests(configurer->
                 configurer
                         .requestMatchers(HttpMethod.GET, "api/v1/postcode/{postcode0}").hasRole("EMPLOYEE")
-                        .requestMatchers(HttpMethod.GET, "api/{postcode1}/{postcode2}").hasRole("MANAGER")
+                        .requestMatchers(HttpMethod.GET, "api/v1/distance/{postcode1}/{postcode2}").hasRole("MANAGER")
                         .requestMatchers(HttpMethod.PUT, "api/postcodes").hasRole("ADMIN")
         );
 

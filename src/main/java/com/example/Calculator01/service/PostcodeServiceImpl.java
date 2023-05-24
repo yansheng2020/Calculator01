@@ -32,41 +32,33 @@ public class PostcodeServiceImpl implements PostcodeService{
     }
 
     @Override
-    public double calculateDistance(PostcodeData data1, PostcodeData data2) {
+    public ResponseData calculateDistance(String startPostcode, String endPostcode) {
 
-        double latitude = data1.getLatitude();
-        double longitude = data1.getLongitude();
-        double latitude2 = data2.getLatitude();
-        double longitude2 = data2.getLongitude();
+        PostcodeData startCoordinates = postcodeDAO.findByPostcode(startPostcode);
+        PostcodeData endCoordinates = postcodeDAO.findByPostcode(endPostcode);
 
-        double lon1Radians = Math.toRadians(longitude);
-        double lon2Radians = Math.toRadians(longitude2);
-        double lat1Radians = Math.toRadians(latitude);
-        double lat2Radians = Math.toRadians(latitude2);
+        var unit = "km";
+        var latitude = startCoordinates.getLatitude();
+        var longitude = startCoordinates.getLongitude();
+        var latitude2 = endCoordinates.getLatitude();
+        var longitude2 = endCoordinates.getLongitude();
 
-        double a = haversine(lat1Radians, lat2Radians)
+        var lon1Radians = Math.toRadians(longitude);
+        var lon2Radians = Math.toRadians(longitude2);
+        var lat1Radians = Math.toRadians(latitude);
+        var lat2Radians = Math.toRadians(latitude2);
+
+        var a = haversine(lat1Radians, lat2Radians)
                 + Math.cos(lat1Radians) * Math.cos(lat2Radians) * haversine(lon1Radians, lon2Radians);
 
-        double c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+        var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
 
-        return (EARTH_RADIUS * c);
+        var distance = (EARTH_RADIUS * c);
+
+        return new ResponseData(startPostcode, latitude, longitude, endPostcode, latitude2, longitude2, distance, unit);
+
     }
 
-    @Override
-    public ResponseData compileResponseData(PostcodeData data1, PostcodeData data2, double theDistance) {
-
-        double latitude = data1.getLatitude();
-        double longitude = data1.getLongitude();
-        double latitude2 = data2.getLatitude();
-        double longitude2 = data2.getLongitude();
-        String postcode1 = data1.getPostcode();
-        String postcode2 = data2.getPostcode();
-        String unit = "km";
-
-        ResponseData theResponseData = new ResponseData(postcode1, latitude, longitude, postcode2, latitude2, longitude2, theDistance, unit);
-
-        return theResponseData;
-    }
 
     @Override
     public String validateUpdate(PostcodeData thePostcodeData) {

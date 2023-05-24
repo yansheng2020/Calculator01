@@ -9,9 +9,7 @@ public interface PostcodeService {
 
     void updatePostcodeCoordinates(PostcodeData thePostcodeData);
 
-    double calculateDistance(PostcodeData data1, PostcodeData data2);
-
-    ResponseData compileResponseData(PostcodeData data1, PostcodeData data2, double theDistance);
+    ResponseData calculateDistance(String startPostcode, String endPostcode);
 
     String validateUpdate(PostcodeData thePostcodeData);
 
