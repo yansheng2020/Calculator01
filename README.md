@@ -20,10 +20,11 @@ git clone https://github.com/yansheng2020/Calculator01.git
 
 1. Install and set up MySQL Server on your machine.
 2. Create a database and import the postcode coordinates data.
-   - The dataset can be obtained from official sources or other reliable postcode coordinate providers.
-   - Import the data into a table in the MySQL database.
-   - Ensure the table has the necessary columns for postcodes and their corresponding coordinates.
-
+   - Create the user connection: run query from src/resources/01_create_user.sql in MySQL root connection
+   - Create schema & table, populate sample data, and set up security: run query from src/resources/02_Create_table_with_sample_data.sql in user connection crated in the last step
+   - Import the data into table: import 'postcodes_coordinates_NL.csv' into the existing table - 'postcode_coordinates_three_nl'
+   - Set up security: run query from src/resources/03_setup_spring_secuurity in the same user connection
+   
 ## Open the Project in IntelliJ
 
 1. Launch IntelliJ IDEA.
