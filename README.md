@@ -42,7 +42,7 @@ git clone https://github.com/yansheng2020/Calculator01.git
 1. Open the project in IntelliJ.
 2. Wait for the IDE to index and load the project dependencies.
 3. Once the project is loaded, click on the "Build" menu and select "Build Project" or use the keyboard shortcut (e.g., `Ctrl + F9`).
-4. IntelliJ will compile the project and generate the necessary build artifacts.
+4. IntelliJ will compile the project and generate the necessary build artifacts (.jar) in the Target folder
 
 ## Run the REST Service
 
