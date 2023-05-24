@@ -1,4 +1,4 @@
-package com.example.Calculator01.security;
+package com.example.Calculator01.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
