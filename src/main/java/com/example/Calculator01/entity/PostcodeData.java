@@ -1,8 +1,13 @@
 package com.example.Calculator01.entity;
 
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
+@Getter
+@Setter
+@ToString
+@NoArgsConstructor
 @Table(name="postcode_coordinates_three_nl")
 public class PostcodeData {
 
@@ -18,10 +23,6 @@ public class PostcodeData {
     @Column(name="longitude")
     private double longitude;
 
-    public PostcodeData(){
-
-    }
-
     public PostcodeData(double latitude, double longitude) {
         this.latitude = latitude;
         this.longitude = longitude;
@@ -33,45 +34,4 @@ public class PostcodeData {
         this.longitude = longitude;
     }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public String getPostcode() {
-        return postcode;
-    }
-
-    public void setPostcode(String postcode) {
-        this.postcode = postcode;
-    }
-
-    public double getLatitude() {
-        return latitude;
-    }
-
-    public void setLatitude(double latitude) {
-        this.latitude = latitude;
-    }
-
-    public double getLongitude() {
-        return longitude;
-    }
-
-    public void setLongitude(double longitude) {
-        this.longitude = longitude;
-    }
-
-    @Override
-    public String toString() {
-        return "PostcodeData{" +
-                "id=" + id +
-                ", postcode='" + postcode + '\'' +
-                ", latitude=" + latitude +
-                ", longitude=" + longitude +
-                '}';
-    }
 }
