@@ -6,7 +6,7 @@ import com.example.Calculator01.service.PostcodeService;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class PostcodeController {
 
     private PostcodeService postcodeService;
@@ -15,12 +15,11 @@ public class PostcodeController {
         postcodeService = thePostcodeService;
     }
 
-    @GetMapping("/{postcode0}")
-    public PostcodeData getCoords(@PathVariable String postcode0){
+    @GetMapping("/postcode/{postcode0}")
+    public PostcodeData getCoordinates(@PathVariable String postcode0){
 
-        PostcodeData fullInfo = postcodeService.findByPostcode(postcode0);
+        return postcodeService.findByPostcode(postcode0);
 
-        return fullInfo;
     }
 
     @GetMapping("/{postcode1}/{postcode2}")
