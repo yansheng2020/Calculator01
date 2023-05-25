@@ -81,6 +81,5 @@ public class PostcodeControllerTest extends AbstractTest {
         String content = mvcResult.getResponse().getContentAsString();
         assertEquals(expected, content);
 
+        }
     }
-
-}

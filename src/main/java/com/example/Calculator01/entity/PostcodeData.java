@@ -10,6 +10,7 @@ import java.util.Objects;
 @Setter
 @ToString
 @NoArgsConstructor
+@EqualsAndHashCode(exclude={"id"})
 @Table(name="postcode_coordinates_three_nl")
 public class PostcodeData {
 
@@ -35,25 +36,5 @@ public class PostcodeData {
         this.latitude = latitude;
         this.longitude = longitude;
     }
-
-    @Override
-    public boolean equals(Object obj) {
-        if (this == obj) {
-            return true;
-        }
-
-        if (obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-
-        PostcodeData other = (PostcodeData) obj;
-
-        // Compare each variable for equality
-        return  Objects.equals(postcode, other.postcode) &&
-                Objects.equals(latitude, other.latitude) &&
-                Objects.equals(longitude, other.longitude);
-
-    }
-
 
 }
