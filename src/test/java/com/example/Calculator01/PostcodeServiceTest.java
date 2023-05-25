@@ -2,6 +2,7 @@ package com.example.Calculator01;
 
 import com.example.Calculator01.dao.PostcodeDAO;
 import com.example.Calculator01.entity.PostcodeData;
+import com.example.Calculator01.entity.ResponseData;
 import com.example.Calculator01.service.PostcodeService;
 import com.example.Calculator01.service.PostcodeServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
@@ -22,6 +23,7 @@ import static org.mockito.Mockito.when;
 public class PostcodeServiceTest {
 
     PostcodeData postcodeDataOne = new PostcodeData();
+    PostcodeData postcodeDataTwo = new PostcodeData();
 
     @MockBean
     private PostcodeDAO postcodeDAO;
@@ -36,9 +38,13 @@ public class PostcodeServiceTest {
         postcodeDataOne.setLatitude(52.87352747);
         postcodeDataOne.setLongitude(5.996327647);
 
+        postcodeDataTwo.setId(5);
+        postcodeDataTwo.setPostcode("7231JH");
+        postcodeDataTwo.setLatitude(52.13855772);
+        postcodeDataTwo.setLongitude(6.225588242);
     }
 
-    @DisplayName("Find By Postcode Service")
+    @DisplayName("Find by postcode service")
     @Test
     public void assertFindByPostcode(){
 
@@ -50,7 +56,23 @@ public class PostcodeServiceTest {
 
     }
 
+    @DisplayName("Calculate distance between start and end")
+    @Test
+    public void assertDistanceCalculation(){
 
+        when(postcodeDAO.findByPostcode("8471RK")).thenReturn(postcodeDataOne);
+        when(postcodeDAO.findByPostcode("7231JH")).thenReturn(postcodeDataTwo);
+
+        ResponseData expected = new ResponseData("8471RK",52.87352747,5.996327647,
+                                                 "7231JH",52.13855772,6.225588242,
+                                                 83.18479947381374,"km");
+
+        assertEquals(expected,postcodeService.calculateDistance("8471RK","7231JH"));
+
+        verify(postcodeDAO).findByPostcode("8471RK");
+        verify(postcodeDAO).findByPostcode("7231JH");
+
+    }
 
 
 

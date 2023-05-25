@@ -1,5 +1,7 @@
 package com.example.Calculator01.entity;
 
+import java.util.Objects;
+
 public class ResponseData {
     private String postcode1;
     private double latitude1;
@@ -97,5 +99,29 @@ public class ResponseData {
                 ", distance=" + distance +
                 ", unit='" + unit + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+
+        if (obj == null || getClass() != obj.getClass()) {
+            return false;
+        }
+
+        ResponseData other = (ResponseData) obj;
+
+        // Compare each variable for equality
+        return  Objects.equals(postcode1, other.postcode1) &&
+                Objects.equals(latitude1, other.latitude1) &&
+                Objects.equals(longitude1, other.longitude1)&&
+                Objects.equals(postcode2, other.postcode2) &&
+                Objects.equals(latitude2, other.latitude2) &&
+                Objects.equals(longitude2, other.longitude2)&&
+                Objects.equals(distance, other.distance) &&
+                Objects.equals(unit, other.unit);
+
     }
 }
