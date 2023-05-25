@@ -118,5 +118,5 @@ PUT http://localhost:8080/newCoordinates
 (a) Successful update: "coordinates are successfully updated;" and the postcode and the coordinates 
 (b) Filed update: "an error occurred"
    
-![image](https://github.com/yansheng2020/Calculator01/assets/68484912/893e219d-3f4b-416d-9414-62596bac4ae7)
+![image](https://github.com/yansheng2020/Calculator01/assets/68484912/b198adc3-5c1e-4570-bda9-10770ee2096e)
 
