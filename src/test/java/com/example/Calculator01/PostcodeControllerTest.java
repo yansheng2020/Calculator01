@@ -1,98 +1,86 @@
 package com.example.Calculator01;
 
-/*
-
+import com.example.Calculator01.dao.PostcodeDAO;
 import com.example.Calculator01.entity.PostcodeData;
 import com.example.Calculator01.entity.ResponseData;
-import com.example.Calculator01.service.PostcodeService;
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
-import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 
-import static org.hamcrest.Matchers.hasSize;
-import static org.hamcrest.Matchers.is;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
-@AutoConfigureMockMvc
-@SpringBootTest
-public class PostcodeControllerTest {
-
-    @Autowired
-    private MockMvc mockMvc;
-
-    @MockBean
-    private PostcodeService postcodeService;
-
-    @Autowired
-    ObjectMapper objectMapper;
-
-    public static final MediaType APPLICATION_JSON_UTF8 = MediaType.APPLICATION_JSON;
-
-    @Test
-    @WithMockUser(username = "yansheng", password = "test123", roles = "EMPLOYEE")
-    public void findByPostcodeHttpRequest() throws Exception{
-
-        PostcodeData postcodeData = new PostcodeData("1065VL",52.36234477, 4.831505362);
-        when(postcodeService.findByPostcode("1065VL")).thenReturn(postcodeData);
-
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/{postcode0}", "1065VL"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.postcode", is("1065VL")))
-                .andExpect(jsonPath("$.latitude", is(52.36234477)))
-                .andExpect(jsonPath("$.longitude", is(4.831505362)));
+public class PostcodeControllerTest extends AbstractTest {
+    @Override
+    @BeforeEach
+    public void setUp() {
+        super.setUp();
     }
 
     @Test
-    @WithMockUser(username = "sam", password = "test123", roles = {"EMPLOYEE","MANAGER"})
-    public void getDistanceHttpRequest() throws Exception{
+    public void findByPostcode() throws Exception {
+        PostcodeData expected = new PostcodeData("8471RK",52.87352747,5.996327647);
+        expected.setId(4);
 
-        PostcodeData Data1 = new PostcodeData("1065VL",52.36234477, 4.831505362);
-        PostcodeData Data2 = new PostcodeData("8471RK",52.87352747, 5.996327647);
-        when(postcodeService.findByPostcode("1065VL")).thenReturn(Data1);
-        when(postcodeService.findByPostcode("8471RK")).thenReturn(Data2);
-        when(postcodeService.calculateDistance(Data1,Data2)).thenReturn(97.02683289015619);
+        String uri = "/api/v1/postcode/8471RK";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+                .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200,status);
 
-        ResponseData responseData = new ResponseData("1065VL",52.36234477, 4.831505362,
-                                                     "8471RK",52.87352747, 5.996327647,
-                                                     97.02683289015619, "km");
-        when(postcodeService.compileResponseData(Data1,Data2,97.02683289015619)).thenReturn(responseData);
+        String content = mvcResult.getResponse().getContentAsString();
+        PostcodeData mockResult = super.mapFromJson(content, PostcodeData.class);
+        assertEquals(expected, mockResult);
 
-        mockMvc.perform(MockMvcRequestBuilders.get("/api/{postcode1}/{postcode2}", "1065VL","8471RK"))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.postcode1", is("1065VL")))
-                .andExpect(jsonPath("$.latitude1", is(52.36234477)))
-                .andExpect(jsonPath("$.longitude1", is(4.831505362)))
-                .andExpect(jsonPath("$.postcode2", is("8471RK")))
-                .andExpect(jsonPath("$.latitude2", is(52.87352747)))
-                .andExpect(jsonPath("$.longitude2", is(5.996327647)))
-                .andExpect(jsonPath("$.distance", is(97.02683289015619)))
-                .andExpect(jsonPath("$.unit", is("km")));
     }
 
     @Test
-    @WithMockUser(username = "susan", password = "test123", roles = {"EMPLOYEE","MANAGER","ADMIN"})
-    public void updatePostcodeCoordinatesHttpRequest() throws Exception{
+    public void calculateDistance() throws Exception{
 
-        PostcodeData updatedPostcodeData = new PostcodeData("1189WK",52.25902059,4.869899159);
-        updatedPostcodeData.setId(2);
+        ResponseData expected = new ResponseData("8471RK",52.87352747,5.996327647,
+                                                 "7231JH",52.13855772,6.225588242,
+                                                 83.18479947381374,"km");
 
-        when(postcodeService.validateUpdate(updatedPostcodeData)).thenReturn("Validation successful");
+        String uri = "/api/v1/distance/8471RK/7231JH";
+        MvcResult mvcResult = mvc.perform(MockMvcRequestBuilders.get(uri)
+                .accept(MediaType.APPLICATION_JSON_VALUE)).andReturn();
 
-        mockMvc.perform(MockMvcRequestBuilders.put("/api/postcodes")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(updatedPostcodeData)))
-                .andExpect(status().isOk());
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200,status);
+
+        String content = mvcResult.getResponse().getContentAsString();
+        ResponseData mockResult = super.mapFromJson(content, ResponseData.class);
+        assertEquals(expected, mockResult);
 
     }
+
+    @Test
+    public void updateCoordinates() throws Exception {
+
+        PostcodeData clientInput = new PostcodeData("4255GC",52.0,6.0);
+        clientInput.setId(1000);
+
+        String expected = "coordinates are successfully updated;\n"
+                + "\nselected postcode: "+ "4255GC"
+                + "\nnew latitude: " + 52.0
+                + "\nnew longitude: " + 6.0;
+
+        String uri = "/api/v1/newCoordinates";
+        String clientInputJson = super.mapToJson(clientInput);
+
+        MvcResult mvcResult = mvc.perform(put(uri)
+                .contentType(MediaType.APPLICATION_JSON_VALUE).content(clientInputJson)).andReturn();
+
+        int status = mvcResult.getResponse().getStatus();
+        assertEquals(200,status);
+
+        String content = mvcResult.getResponse().getContentAsString();
+        assertEquals(expected, content);
+
+    }
+
 }
-
-*/
