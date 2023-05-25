@@ -53,18 +53,63 @@ git clone https://github.com/yansheng2020/Calculator01.git
 
 ## Usage
 
+(1) Find a specific postcode's coordinates
+
+To get a postcode's coordinates, send a GET request to the appropriate endpoint. Here's an example using postman:
+
+1. Launch Postman and ensure you have it installed on your machine.
+2. Set the request type to GET.
+3. Enter the URL for the endpoint, replacing <host> with the appropriate hostname and <port> with the port number where your REST service is running:
+
+GET http://localhost:8080/postcode/postcode0
+   
+Replace postcode0 with the actual postcode for which you want to check.
+4. Under the 'Authorization Tab', fill 'Username' with 'yansheng', fill 'Password' with 'test123'
+5. Click on the "Send" button to send the GET request.
+6. Postman will make the request to the specified endpoint, and you will receive a response containing
+(a) The postcode id, the postcode, and the coordinates 
+
+
+(2) Calculate the distance betweeen 2 postcodes in NL
+
 To calculate the geographic straight-line distance between two postcodes, send a GET request to the appropriate endpoint. Here's an example using postman:
 
 1. Launch Postman and ensure you have it installed on your machine.
 2. Set the request type to GET.
 3. Enter the URL for the endpoint, replacing <host> with the appropriate hostname and <port> with the port number where your REST service is running:
 
-GET http://localhost:8080/postcode1/postcode2
+GET http://localhost:8080/distance/postcode1/postcode2
 
 Replace postcode1 and postcode2 with the actual postcodes for which you want to calculate the distance.
 
-4. Click on the "Send" button to send the GET request.
-5. Postman will make the request to the specified endpoint, and you will receive a response containing
+4. Under the 'Authorization Tab', fill 'Username' with 'sam', fill 'Password' with 'test123'
+5. Click on the "Send" button to send the GET request.
+6. Postman will make the request to the specified endpoint, and you will receive a response containing
 (a) The postcode and the coordinates of both locations.
 (b) The distance between the two locations in kilometers
 (c) A fixed string “unit” that has the value "km"
+   
+   
+(3) Update a specific postcode
+   
+To update a specific postcode coordinates, send a PUT request to the appropriate endpoint. Here's an example using postman:
+   
+1. Launch Postman and ensure you have it installed on your machine.
+2. Set the request type to PUT.
+3. Enter the URL for the endpoint, replacing <host> with the appropriate hostname and <port> with the port number where your REST service is running:
+
+PUT http://localhost:8080/newCoordinates
+
+4. In the 'Body' section, select 'raw' and 'JSON', populate the 'Body' section using JSON format incl. 'postcode', 'latitude', and 'longitude'
+   Ex:
+   {
+    "id": 1000,
+    "postcode": "4255GC",
+    "latitude": 51.77169805,
+    "longitude": 4.920078638
+   }
+5. Under the 'Authorization Tab', fill 'Username' with 'susan', fill 'Password' with 'test123' 
+6. Click on the "Send" button to send the PUT request.
+7. Postman will make the request to the specified endpoint, and you will receive a response upon successful or failed update containing
+(a) Successful update: "coordinates are successfully updated;" and the postcode and the coordinates 
+(b) Filed update: "an error occurred"
