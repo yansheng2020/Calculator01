@@ -22,9 +22,9 @@ import static org.mockito.Mockito.when;
 @SpringBootTest
 public class PostcodeServiceTest {
 
-    PostcodeData postcodeDataOne = new PostcodeData();
-    PostcodeData postcodeDataTwo = new PostcodeData();
-    PostcodeData postcodeDataThree = new PostcodeData();
+    private PostcodeData postcodeDataOne = new PostcodeData();
+    private PostcodeData postcodeDataTwo = new PostcodeData();
+    private PostcodeData postcodeDataThree = new PostcodeData();
 
 
     @MockBean
@@ -51,8 +51,8 @@ public class PostcodeServiceTest {
         postcodeDataThree.setLongitude(6.0);
     }
 
-    @DisplayName("Find by postcode service")
     @Test
+    @DisplayName("check if service invokes mock postcodeDAO to find by postcode")
     public void assertFindByPostcode(){
 
         when(postcodeDAO.findByPostcode("8471RK")).thenReturn(postcodeDataOne);
@@ -63,14 +63,14 @@ public class PostcodeServiceTest {
 
     }
 
-    @DisplayName("Calculate distance between start and end")
     @Test
+    @DisplayName("check if service invokes mock postcodeDAO to calculate distance between start and end")
     public void assertDistanceCalculation(){
 
         when(postcodeDAO.findByPostcode("8471RK")).thenReturn(postcodeDataOne);
         when(postcodeDAO.findByPostcode("7231JH")).thenReturn(postcodeDataTwo);
 
-        ResponseData expected = new ResponseData("8471RK",52.87352747,5.996327647,
+        var expected = new ResponseData("8471RK",52.87352747,5.996327647,
                                                  "7231JH",52.13855772,6.225588242,
                                                  83.18479947381374,"km");
 
@@ -81,14 +81,14 @@ public class PostcodeServiceTest {
 
     }
 
-    @DisplayName("Update coordinates of a specific postcode")
     @Test
+    @DisplayName("check if service invokes mock postcodeDAO to update coordinates of a specific postcode")
     public void assertUpdateCoordinates(){
 
         when(postcodeDAO.updatePostcodeCoordinates(postcodeDataThree)).thenReturn(postcodeDataThree);
         when(postcodeDAO.findByPostcode("7231JH")).thenReturn(postcodeDataThree);
 
-        String expected = "coordinates are successfully updated;\n"
+        var expected = "coordinates are successfully updated;\n"
                 + "\nselected postcode: "+ "7231JH"
                 + "\nnew latitude: " + 52.0
                 + "\nnew longitude: " + 6.0;

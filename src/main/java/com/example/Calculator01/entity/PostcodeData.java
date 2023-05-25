@@ -3,8 +3,6 @@ package com.example.Calculator01.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Objects;
-
 @Entity
 @Getter
 @Setter
@@ -25,11 +23,6 @@ public class PostcodeData {
     private double latitude;
     @Column(name="longitude")
     private double longitude;
-
-    public PostcodeData(double latitude, double longitude) {
-        this.latitude = latitude;
-        this.longitude = longitude;
-    }
 
     public PostcodeData(String postcode, double latitude, double longitude) {
         this.postcode = postcode;

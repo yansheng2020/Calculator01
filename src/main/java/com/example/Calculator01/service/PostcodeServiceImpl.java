@@ -63,9 +63,9 @@ public class PostcodeServiceImpl implements PostcodeService{
     @Transactional
     public String updatePostcodeCoordinates(PostcodeData thePostcodeData) {
 
-        PostcodeData clientRequest = postcodeDAO.updatePostcodeCoordinates(thePostcodeData);
+        var clientRequest = postcodeDAO.updatePostcodeCoordinates(thePostcodeData);
 
-        PostcodeData dbResult = postcodeDAO.findByPostcode(clientRequest.getPostcode());
+        var dbResult = postcodeDAO.findByPostcode(clientRequest.getPostcode());
 
         if(clientRequest.equals(dbResult)){
             return "coordinates are successfully updated;\n"
