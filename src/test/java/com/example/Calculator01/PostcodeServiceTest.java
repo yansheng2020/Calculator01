@@ -1,5 +1,96 @@
 package com.example.Calculator01;
 
+import com.example.Calculator01.dao.PostcodeDAO;
+import com.example.Calculator01.entity.PostcodeData;
+import com.example.Calculator01.service.PostcodeService;
+import com.example.Calculator01.service.PostcodeServiceImpl;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.context.ApplicationContext;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
+@SpringBootTest
+public class PostcodeServiceTest {
+
+    PostcodeData postcodeDataOne = new PostcodeData();
+
+    @Mock
+    private PostcodeDAO postcodeDAO;
+
+    @InjectMocks
+    private PostcodeServiceImpl postcodeService;
+
+    @BeforeEach
+    public void beforeEach(){
+        postcodeDataOne.setId(4);
+        postcodeDataOne.setPostcode("8471RK");
+        postcodeDataOne.setLatitude(52.87352747);
+        postcodeDataOne.setLongitude(5.996327647);
+
+    }
+
+    @DisplayName("Find By Postcode Service")
+    @Test
+    public void assertFindByPostcode(){
+
+        when(postcodeDAO.findByPostcode("8471RK")).thenReturn(postcodeDataOne);
+
+        assertEquals(postcodeDataOne, postcodeService.findByPostcode("8471RK"));
+
+        verify(postcodeDAO).findByPostcode("8471RK");
+
+    }
+
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*
 import com.example.Calculator01.dao.PostcodeDAO;
 import com.example.Calculator01.entity.PostcodeData;
