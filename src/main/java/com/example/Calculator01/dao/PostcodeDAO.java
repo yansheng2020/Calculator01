@@ -6,6 +6,6 @@ public interface PostcodeDAO {
 
     PostcodeData findByPostcode(String thePostcode);
 
-    void updatePostcodeCoordinates(PostcodeData thePostcodeData);
+    PostcodeData updatePostcodeCoordinates(PostcodeData thePostcodeData);
 
 }

@@ -25,8 +25,8 @@ public class PostcodeDAOImpl implements PostcodeDAO {
     }
 
     @Override
-    public void updatePostcodeCoordinates(PostcodeData thePostcodeData) {
-        entityManager.merge(thePostcodeData);
+    public PostcodeData updatePostcodeCoordinates(PostcodeData thePostcodeData) {
+        return entityManager.merge(thePostcodeData);
     }
 
 }

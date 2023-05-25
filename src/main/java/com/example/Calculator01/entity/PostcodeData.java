@@ -49,10 +49,10 @@ public class PostcodeData {
         PostcodeData other = (PostcodeData) obj;
 
         // Compare each variable for equality
-        return Objects.equals(id, other.id) &&
-                Objects.equals(postcode, other.postcode) &&
+        return  Objects.equals(postcode, other.postcode) &&
                 Objects.equals(latitude, other.latitude) &&
                 Objects.equals(longitude, other.longitude);
+
     }
 
 

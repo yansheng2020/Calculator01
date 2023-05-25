@@ -61,9 +61,9 @@ public class PostcodeServiceImpl implements PostcodeService{
 
     @Override
     @Transactional
-    public String updatePostcodeCoordinates(PostcodeData clientRequest) {
+    public String updatePostcodeCoordinates(PostcodeData thePostcodeData) {
 
-        postcodeDAO.updatePostcodeCoordinates(clientRequest);
+        PostcodeData clientRequest = postcodeDAO.updatePostcodeCoordinates(thePostcodeData);
 
         PostcodeData dbResult = postcodeDAO.findByPostcode(clientRequest.getPostcode());
 
