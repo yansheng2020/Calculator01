@@ -2,6 +2,10 @@
 
 Geographic Distance Calculation REST Service. This REST service calculates the geographic (straight line) distance between two postcodes in the Netherlands using MySQL for storing postcode coordinates.
 
+API Design
+
+![image](https://github.com/yansheng2020/Calculator01/assets/68484912/af77d4b3-9009-4bcc-b5c5-8be071b97d0c)
+
 ## Prerequisites
 
 Before building and running this service, ensure you have the following prerequisites installed:
@@ -113,3 +117,6 @@ PUT http://localhost:8080/newCoordinates
 7. Postman will make the request to the specified endpoint, and you will receive a response upon successful or failed update containing
 (a) Successful update: "coordinates are successfully updated;" and the postcode and the coordinates 
 (b) Filed update: "an error occurred"
+   
+![image](https://github.com/yansheng2020/Calculator01/assets/68484912/a0225808-dbcc-4997-b4f2-d2d75a194311)
+
