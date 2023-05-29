@@ -65,7 +65,7 @@ To get a postcode's coordinates, send a GET request to the appropriate endpoint.
 2. Set the request type to GET.
 3. Enter the URL for the endpoint, replacing <host> with the appropriate hostname and <port> with the port number where your REST service is running:
 
-GET http://localhost:8080/postcode/postcode0
+GET http://localhost:8080/api/v1/postcode/postcode0
    
 Replace postcode0 with the actual postcode for which you want to check.
 4. Under the 'Authorization Tab', fill 'Username' with 'yansheng', fill 'Password' with 'test123'
@@ -82,7 +82,7 @@ To calculate the geographic straight-line distance between two postcodes, send a
 2. Set the request type to GET.
 3. Enter the URL for the endpoint, replacing <host> with the appropriate hostname and <port> with the port number where your REST service is running:
 
-GET http://localhost:8080/distance/postcode1/postcode2
+GET http://localhost:8080/api/v1/distance/postcode1/postcode2
 
 Replace postcode1 and postcode2 with the actual postcodes for which you want to calculate the distance.
 
@@ -102,7 +102,7 @@ To update a specific postcode coordinates, send a PUT request to the appropriate
 2. Set the request type to PUT.
 3. Enter the URL for the endpoint, replacing <host> with the appropriate hostname and <port> with the port number where your REST service is running:
 
-PUT http://localhost:8080/newCoordinates
+PUT http://localhost:8080/api/v1/newCoordinates
 
 4. In the 'Body' section, select 'raw' and 'JSON', populate the 'Body' section using JSON format incl. 'postcode', 'latitude', and 'longitude'
    Ex:
